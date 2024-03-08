@@ -1,0 +1,44 @@
+.background {
+  background-image: url(../images/Homepage-Background.gif);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+}
+.start-btn {
+  border-radius: 20px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 20px;
+  background: #7e9171;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.start-btn:hover {
+  background: #6a6447;
+  text-decoration: none;
+}
+.main-heading {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.main-paragraph {
+  font-size: 18px;
+  margin-bottom: 30px;
+  max-width: 700px;
+  font-family: 'Arial', sans-serif;
+}
