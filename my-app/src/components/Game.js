@@ -24,7 +24,6 @@ export default function Game() {
   const [playedCardsPile, setPlayedCardsPile] = useState([]);
   const [drawCardPile, setDrawCardPile] = useState([]);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
-
   const [playBBgMusic, {
       pause
   }] = useSound(bgMusic, {
@@ -46,11 +45,6 @@ export default function Game() {
   const [playGameOverSound] = useSound(gameOverSound, {
       volume: 1
   });
-
-
-  
-
-
   const togglePlay = () => {
       if (isMusicPlaying) {
           pause();
@@ -59,7 +53,6 @@ export default function Game() {
       }
       setIsMusicPlaying(!isMusicPlaying);
   };
-  
   useEffect(() => {
 
       const shuffledCards = shuffleArray(cardsArr);
@@ -67,9 +60,7 @@ export default function Game() {
       setPlayerDeck(playerDeck)
       const botDeck = [...shuffledCards.splice(0, 7)]
       setBotDeck(botDeck)
-
       let startingCardIndex = 0;
-
       while (
           shuffledCards[startingCardIndex] === 'skipR' ||
           shuffledCards[startingCardIndex] === 'reveR' ||
@@ -88,7 +79,6 @@ export default function Game() {
       ) {
           startingCardIndex++;
       }
-
       const startingCard = shuffledCards[startingCardIndex];
       if (startingCard) {
           playedCardsPile.push(startingCard);
@@ -106,7 +96,6 @@ export default function Game() {
           playGameOverSound();
       }
   };
-
   const handleCardPlay = (played_card) => {
       const removeIndexOfPlayer = playerDeck.indexOf(played_card);
       const updatedPlayerDeck = [...playerDeck.slice(0, removeIndexOfPlayer), ...playerDeck.slice(removeIndexOfPlayer + 1)];
@@ -118,7 +107,6 @@ export default function Game() {
       setCurrentColor(playedColor)
       setCurrentNumber(playedNumber)
   }
-
   const onCardPlayedHandlerForPlayer = (played_card) => {
       switch (played_card) {
           case '0R':
@@ -163,7 +151,6 @@ export default function Game() {
           case '9B': {
               const numberOfPlayedCard = played_card.charAt(0)
               const colorOfPlayedCard = played_card.charAt(1)
-
               if (currentColor === colorOfPlayedCard || currentNumber === numberOfPlayedCard) {
                   handleCardPlay(played_card)
                   settingColorAndNumber(colorOfPlayedCard, numberOfPlayedCard)
@@ -182,7 +169,6 @@ export default function Game() {
           case 'reveB': {
               const colorOfPlayedCard = played_card.charAt(4);
               const numberOfPlayedCard = played_card.charAt(0)
-
               if (currentColor === colorOfPlayedCard || currentNumber === numberOfPlayedCard) {
                   handleCardPlay(played_card)
                   settingColorAndNumber(colorOfPlayedCard, numberOfPlayedCard)
@@ -197,7 +183,6 @@ export default function Game() {
           case "D2R": {
               const colorOfPlayedCard = played_card.charAt(2);
               const numberOfPlayedCard = played_card.charAt(0)
-
               if (currentColor === colorOfPlayedCard || currentNumber === numberOfPlayedCard ) {
                   handleCardPlay(played_card)
                   playDraw2CardSound();
@@ -235,8 +220,7 @@ export default function Game() {
                       setBotDeck(updatedBotDeck);
                   }else {
                       alert('Invalid Key!');
-                  }
-              
+                  }       
               break;
           }
           case 'W': {
@@ -295,15 +279,12 @@ export default function Game() {
         setTurn('Bot')
     }
 }
-
-
 const findMostRepeatedColor = () => {
     const colorCount = {};
     const colors = ['R', 'G', 'B', 'Y'];
     for (const color of colors) {
         colorCount[color] = 0;
     }
-
     for (const card of botDeck) {
         if (card === 'W' || card === 'd4W') {
             colorCount['G']++;
@@ -328,17 +309,12 @@ const findMostRepeatedColor = () => {
     return mostRepeatedColor;
 };
 
-
-
   const botPlay = () => {
-    setTimeout(() => {
-        
+    setTimeout(() => {   
         const colorAndNumberCards = botDeck.filter(card => /^[0-9]+[RGBY]$/.test(card));
         const ColorAndNumberOfCard = colorAndNumberCards.length;
         let botPlayedCardIndexColorAndNumber;
-
         if (ColorAndNumberOfCard > 0) {
-
             for (let i = 0; i < ColorAndNumberOfCard; i++) {
                 const currentCard = colorAndNumberCards[i];
                 const numberOfCurrentCard = currentCard.charAt(0);
@@ -376,7 +352,6 @@ const findMostRepeatedColor = () => {
         } else {
             botPlayedCardIndexDraw2 = null;
         }
-
         const botPlayedCardForDraw2 = botPlayedCardIndexDraw2 !== null ? drawCards[botPlayedCardIndexDraw2] : null;
         const numberOfBotPlayedCardForDraw2 = botPlayedCardForDraw2 ? botPlayedCardForDraw2.charAt(0) : null;
         const colorOfBotPlayedCardForDraw2 = botPlayedCardForDraw2 ? botPlayedCardForDraw2.charAt(2) : null;
@@ -384,25 +359,19 @@ const findMostRepeatedColor = () => {
         const reverseCards = botDeck.filter(card => /^reve[RGBY]$/.test(card));
         const NumberOfReverseCards = reverseCards.length;
         let botPlayedCardIndexReverse;
-
         if (NumberOfReverseCards > 0) {
-
             for (let i = 0; i < NumberOfReverseCards; i++) {
                 const currentCardReverse = reverseCards[i];
                 const numberOfCurrentCardReverse = currentCardReverse.charAt(0);
                 const colorOfCurrentCardReverse = currentCardReverse.charAt(4);
-
                 if ((colorOfCurrentCardReverse === currentColor || numberOfCurrentCardReverse === currentNumber)) {
                     botPlayedCardIndexReverse = i;
                     break;
                 }
-            }
-
-           
+            } 
         } else {
             botPlayedCardIndexReverse = null;
         }
-
         const botPlayedCardForReverse = botPlayedCardIndexReverse !== null ? reverseCards[botPlayedCardIndexReverse] : null;
         const numberOfBotPlayedCardForReverse = botPlayedCardForReverse ? botPlayedCardForReverse.charAt(0) : null;
         const colorOfBotPlayedCardForReverse = botPlayedCardForReverse ? botPlayedCardForReverse.charAt(4) : null;
@@ -410,25 +379,19 @@ const findMostRepeatedColor = () => {
         const skipCards = botDeck.filter(card => /^skip[RGBY]$/.test(card));
         const NumberOfSkipCards = skipCards.length;
         let botPlayedCardIndexSkip;
-
         if (NumberOfSkipCards > 0) {
-
             for (let i = 0; i < NumberOfSkipCards; i++) {
                 const currentCardSkip = skipCards[i];
                 const numberOfCurrentCardSkip = currentCardSkip.charAt(0);
                 const colorOfCurrentCardSkip = currentCardSkip.charAt(4);
-
                 if ((colorOfCurrentCardSkip === currentColor || numberOfCurrentCardSkip === currentNumber)) {
                     botPlayedCardIndexSkip = i;
                     break;
                 }
             }
-
-           
         } else {
             botPlayedCardIndexSkip = null;
         }
-
         const botPlayedCardForSkip = botPlayedCardIndexSkip !== null ? skipCards[botPlayedCardIndexSkip] : null;
         const numberOfBotPlayedCardForSkip = botPlayedCardForSkip ? botPlayedCardForSkip.charAt(0) : null;
         const colorOfBotPlayedCardForSkip = botPlayedCardForSkip ? botPlayedCardForSkip.charAt(4) : null;
@@ -442,9 +405,7 @@ const findMostRepeatedColor = () => {
         const NumberOfDrawWildCards = drawWildCards.length;
         const botPlayedCardForDrawWild = NumberOfDrawWildCards > 0 ? drawWildCards[0] : null;
         const numberOfBotPlayedCardForDrawWild = botPlayedCardForDrawWild ? 'd4W' : null;
-
-
-
+      
         const reverseCardPlay = (cardToPlay, numberOfCardToPlay , colorOfCardToPlay) =>{
             setPlayedCardsPile((prevPile) => [...prevPile, cardToPlay]);
             setBotDeck((prevDeck) => {
@@ -554,19 +515,14 @@ const findMostRepeatedColor = () => {
 
         } else if (NumberOfSkipCards > 0 && (colorOfBotPlayedCardForSkip === currentColor || numberOfBotPlayedCardForSkip === currentNumber) ) {
            skipCardPlay(botPlayedCardForSkip , numberOfBotPlayedCardForSkip , colorOfBotPlayedCardForSkip)
-
             if (botDeck.length === 1) {
                 setGameOver(true);
                 setWinner("Bot");
                 playGameOverSound();
-            }
-
-             
+            }  
         }
         else if (botPlayedCardIndexColorAndNumber !== null && (colorOfBotPlayedCard === currentColor || numberOfBotPlayedCard === currentNumber)) {
-        
             colorAndNumberCardPlay(botPlayedCardForColorAndNUmber , numberOfBotPlayedCard , colorOfBotPlayedCard)
-    
         } else if (NumberOfDrawCards > 0 && (colorOfBotPlayedCardForDraw2 === currentColor || numberOfBotPlayedCardForDraw2 === currentNumber)) {
               drawCardPlay(botPlayedCardForDraw2 , numberOfBotPlayedCardForDraw2 , colorOfBotPlayedCardForDraw2)
                if (botDeck.length === 1) {
@@ -575,26 +531,20 @@ const findMostRepeatedColor = () => {
                 playGameOverSound();
             }
           ;
-        } else if (NumberOfWildCards > 0) {
-           
+        } else if (NumberOfWildCards > 0) {   
             wildCardPlay(botPlayedCardForWild , numberOfBotPlayedCardForWild)
-
             if (botDeck.length === 1) {
                 setGameOver(true);
                 setWinner("Bot");
                 playGameOverSound();
             }  
-        } else if (NumberOfDrawWildCards > 0 ) {
-          
+        } else if (NumberOfDrawWildCards > 0 ) {       
             draw4WildCardPlay(botPlayedCardForDrawWild , numberOfBotPlayedCardForDrawWild)
-
             if (botDeck.length === 1) {
                 setGameOver(true);
                 setWinner("Bot");
                 playGameOverSound();
-            }
-          
-        
+            }   
           }else {
             const copiedDrawCardPileArray = [...drawCardPile];
             const drawCard1 = copiedDrawCardPileArray.pop();
