@@ -47,6 +47,8 @@ export default function Game() {
       volume: 1
   });
 
+ 
+
 
   
 
@@ -452,7 +454,8 @@ const findMostRepeatedColor = () => {
                 if (indexToRemove !== -1) {
                     return prevDeck.slice(0, indexToRemove).concat(prevDeck.slice(indexToRemove + 1));
                 }
-            });            setCurrentNumber(numberOfCardToPlay);
+            });            
+            setCurrentNumber(numberOfCardToPlay);
             setCurrentColor(colorOfCardToPlay);
             playSkipCardSound()     
             setTurn('Bot');
@@ -465,7 +468,8 @@ const findMostRepeatedColor = () => {
                 if (indexToRemove !== -1) {
                     return prevDeck.slice(0, indexToRemove).concat(prevDeck.slice(indexToRemove + 1));
                 }
-            });            setCurrentNumber(numberOfCardToPlay);
+            });            
+            setCurrentNumber(numberOfCardToPlay);
             setCurrentColor(colorOfCardToPlay);
             playSkipCardSound();
             setTurn('Bot');
@@ -491,12 +495,13 @@ const findMostRepeatedColor = () => {
 
         const drawCardPlay = (cardToPlay, numberOfCardToPlay , colorOfCardToPlay) =>{
             setPlayedCardsPile((prevPile) => [...prevPile, cardToPlay]);
- setBotDeck((prevDeck) => {
+            setBotDeck((prevDeck) => {
                 const indexToRemove = prevDeck.indexOf(cardToPlay);
                 if (indexToRemove !== -1) {
                     return prevDeck.slice(0, indexToRemove).concat(prevDeck.slice(indexToRemove + 1));
                 }
-            });            const copiedDrawCardPileArray = [...drawCardPile];
+            });           
+            const copiedDrawCardPileArray = [...drawCardPile];
             const drawCard1 = copiedDrawCardPileArray.pop();
             const drawCard2 = copiedDrawCardPileArray.pop();
             setDrawCardPile(copiedDrawCardPileArray);
@@ -513,7 +518,8 @@ const findMostRepeatedColor = () => {
                 if (indexToRemove !== -1) {
                     return prevDeck.slice(0, indexToRemove).concat(prevDeck.slice(indexToRemove + 1));
                 }
-            });            playWildCardSound();
+            });           
+            playWildCardSound();
             setCurrentNumber(numberOfCardToPlay);
             const mostRepeatedColor = findMostRepeatedColor();
             setCurrentColor(mostRepeatedColor);
@@ -527,7 +533,8 @@ const findMostRepeatedColor = () => {
                 if (indexToRemove !== -1) {
                     return prevDeck.slice(0, indexToRemove).concat(prevDeck.slice(indexToRemove + 1));
                 }
-            });            setCurrentNumber(numberOfCardToPlay);
+            });           
+            setCurrentNumber(numberOfCardToPlay);
             const mostRepeatedColor = findMostRepeatedColor();
             setCurrentColor(mostRepeatedColor);
             playDraw4CardSound();
@@ -642,6 +649,8 @@ const findMostRepeatedColor = () => {
         }
         
     }, [turn, botPlay]);
+
+   
  
   return (
         <>
@@ -673,7 +682,7 @@ const findMostRepeatedColor = () => {
       {/* PlayerDeck */}
       <div style={{ position: 'fixed', bottom: '10px',left: '10px', padding: '5px 5px', alignItems: 'center',}}>
           {playerDeck.map((item, index , card) => (
-          <img key={`${card}-${index}`} className='Card' onClick={turn==="Player" ? ()=> onCardPlayedHandlerForPlayer(item) : null}
+         <img key={`${card}-${index}`} className='Card' onClick={turn==="Player" ? ()=> onCardPlayedHandlerForPlayer(item) : null}
           src={require(`../assets/${item}.png`)}
           alt="Player Deck Cards IMG"
           />
@@ -731,6 +740,11 @@ const findMostRepeatedColor = () => {
 
           {isMusicPlaying ? <span>&#x1F50A;</span> : <span>&#x1F507;</span>}
       </button>
+
       </>
+
+
+
+
   ); 
 }
