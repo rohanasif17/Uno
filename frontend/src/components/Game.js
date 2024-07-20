@@ -8,7 +8,7 @@ import draw2CardSound from "../sounds/draw2-sound.mp3";
 import wildCardSound from "../sounds/wild-sound.mp3";
 import draw4CardSound from "../sounds/draw4-sound.mp3";
 import gameOverSound from "../sounds/game-over-sound.mp3";
-import "./Game.css";
+import "./Game.css" 
 
 export default function Game() {
   const [gameOver, setGameOver] = useState(false);
