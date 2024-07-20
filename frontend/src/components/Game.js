@@ -16,8 +16,8 @@ export default function Game() {
   const [turn, setTurn] = useState("Player");
   const [playerDeck, setPlayerDeck] = useState([]);
   const [botDeck, setBotDeck] = useState([]);
-  const [currentColor, setCurrentColor] = useState("");
   const [currentNumber, setCurrentNumber] = useState("");
+  const [currentColor, setCurrentColor] = useState("");
   const [playedCardsPile, setPlayedCardsPile] = useState([]);
   const [drawCardPile, setDrawCardPile] = useState([]);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
